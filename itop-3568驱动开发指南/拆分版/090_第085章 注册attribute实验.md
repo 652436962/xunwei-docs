@@ -1,13 +1,13 @@
 # 第085章 注册attribute实验
 
 实验成功后使用rmmod mkdir_item 命令卸载驱动程序，如图84.9 所示。
-![](images/img008712.jpeg)
+![](../images/img008712.jpeg)
 图84.9至此，完善drop 和release 函数实验就完成了。
 
 本章学习在item 下创建属性。
 ## 85.1 API 函数介绍
 在学习设备树插件使用时候使用echo 1 > status 命令可以使能设备树插件，如图85.1 所示。
-![](images/img008608.jpeg)
+![](../images/img008608.jpeg)
 图85.1图85.1 中的status 即属性文件。在Linux 中提供了以下6 个宏定义用于定义属性文件。CONFIGFS_ATTR(_pfx, _name)、CONFIGFS_ATTR_RO(_pfx, _name)、CONFIGFS_ATTR_WO(_pfx, _name)、CONFIGFS_BIN_ATTR(_pfx, _name, _priv, _maxsz)、CONFIGFS_BIN_ATTR_RO(_pfx, _name, _priv, _maxsz)CONFIGFS_BIN_ATTR_WO(_pfx, _name, _priv, _maxsz)宏CONFIGFS_ATTR(_pfx, _name)、CONFIGFS_ATTR_RO(_pfx, _name)和CONFIGFS_ATTR_WO(_pfx, _name)原型如代码清单85.1 所示。代码清单85.1
 ```c
 #define CONFIGFS_ATTR(_pfx, _name)\
@@ -214,7 +214,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 85.3 运行测试
 ### 85.3.1 编译驱动程序
 在attr.c 代码同一目录下创建Makefile 文件，如图85.2 所示。
-![](images/img008753.jpeg)
+![](../images/img008753.jpeg)
 
 图85.2Makefile 文件内容如代码清单85.4 所示。代码清单85.4
 ```c
@@ -229,28 +229,28 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 回到存放attr.c 和Makefile 文件目录下使用命令make 编译驱动程序，编译完成如图85.3所示。
-![](images/img008758.jpeg)
+![](../images/img008758.jpeg)
 图85.3编译完生成attr.ko 目标文件，如图85.4 所示
-![](images/img008759.jpeg)
+![](../images/img008759.jpeg)
 图85.4至此驱动模块就编译成功了，接下来进行测试。
 ### 85.3.2 运行测试
 开发板启动之后，使用insmod attr.ko 命令加载驱动程序，如图85.5 所示。
-![](images/img008760.jpeg)
+![](../images/img008760.jpeg)
 图85.5驱动加载之后进入/sys/kernel/config 目录下，可以看到注册生成的myconfigfs 子系统，如图85.6 所示。
-![](images/img008684.jpeg)
+![](../images/img008684.jpeg)
 图85.6然后进入注册生成的myconfigfs 子系统，可以看到注册生成的mygroup 容器，如图85.7所示。
 
-![](images/img008685.jpeg)
+![](../images/img008685.jpeg)
 图85.7然后输入mkdir test 命令创建config_item，创建成功之后会打印“mygroup_make_item”。如图85.8 所示。
-![](images/img008710.jpeg)
+![](../images/img008710.jpeg)
 图85.8然后进入到test 目录下，如果实现成功可以看到生成的属性read 和write。如图85.9 所示。
-![](images/img008764.jpeg)
+![](../images/img008764.jpeg)
 图85.9输入以下命令对属性进行读写操作，如代码清单85.5 所示。代码清单85.5cat readecho 1 > write实验成功如图85.10 所示
-![](images/img008765.jpeg)
+![](../images/img008765.jpeg)
 图85.10在图85.10 中分别对属性read 和write 进行读写操作，如果读写操作成功会分别打印“myread_show”和“mywrite_store”。实验成功后输入rmdir test 命令删除item，如图85.11 所示。
-![](images/img008711.jpeg)
+![](../images/img008711.jpeg)
 
 图85.11最后使用rmmod attr 命令卸载驱动程序，如图85.12。
-![](images/img008768.jpeg)
+![](../images/img008768.jpeg)
 图85.12至此，注册attribute 实验就完成了。
 

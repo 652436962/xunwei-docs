@@ -69,7 +69,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 97.2 运行测试
 ### 97.2.1 编译驱动程序
 在ktype.c 代码同一目录下创建Makefile 文件，如图97.1 所示。
-![](images/img009008.jpeg)
+![](../images/img009008.jpeg)
 图97.1Makefile 文件内容如代码清单97.2 所示：代码清单97.2
 ```c
 export ARCH=arm64#设置平台架构
@@ -83,6 +83,6 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 在存放ktype.c 和Makefile 文件目录下使用make 命令编译驱动程序，编译完成如图97.2所示。
-![](images/img009009.jpeg)
+![](../images/img009009.jpeg)
 图97.2编译完生成ktype.ko 目标文件，如图97.3 所示：
 

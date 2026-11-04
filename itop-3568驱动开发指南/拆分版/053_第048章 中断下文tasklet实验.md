@@ -134,7 +134,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 48.4 运行测试
 ### 48.4.1 编译驱动程序
 在和interrupt.c 的同一目录下创建Makefile 文件，如图48.1 所示。
-![](images/img007807.jpeg)
+![](../images/img007807.jpeg)
 图48.1Makefile 文件内容如代码清单48.8 所示：代码清单48.8
 ```c
 export ARCH=arm64#设置平台架构
@@ -151,22 +151,22 @@ clean:
 make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 使用命令make 编译驱动程序，编译成功后如图48.2 所示：
-![](images/img007812.jpeg)
+![](../images/img007812.jpeg)
 48.2编译完后会生成interrupt.ko 目标文件，如图48.3 所示：
-![](images/img007813.jpeg)
+![](../images/img007813.jpeg)
 图48.3至此驱动模块就编译成功了。
 ### 48.4.2 运行测试
 将本章节编译好的interrupt.ko 驱动文件拷贝到开发板上。开发板启动之后，使用insmod interrupt.ko 命令进行驱动模块的加载，如下图48.4 所示：
-![](images/img007814.jpeg)
+![](../images/img007814.jpeg)
 图48.4通过图48.11 可以看出驱动模块加载后，申请的中断号（113）被打印了出来，然后用手触摸连接的LVDS 屏幕，触发中断服务程序，如果实现成功会打印如下图48.5 所示：
 
-![](images/img007818.jpeg)
+![](../images/img007818.jpeg)
 图48.5在图48.5 中，可以看到打印中断处理函数中添加的打印“This is test_interrupt”和tasklet处理函数中添加的打印“data is 1”，说明成功执行了中断下文tasklet 处理函数。实验成功后可以使用rmmod interrupt 命令进行驱动的卸载，如下图48.6 所示：
-![](images/img007819.jpeg)
+![](../images/img007819.jpeg)
 图48.6在什么是tasklet 小节中，讲解了tasklet 函数中不能调用休眠函数，在此我们在上述驱动实验的基础上添加休眠函数，如下图48.7 所示：
 
-![](images/img007822.jpeg)
+![](../images/img007822.jpeg)
 图48.7同理，编译驱动模块并卸载掉之前的驱动模块后，加载新编译的驱动模块，如下图48.8所示：
-![](images/img007823.jpeg)
+![](../images/img007823.jpeg)
 图48.8然后用手触摸连接的LVDS 屏幕，实验成功会打印如图48.16 所示的内核崩溃信息，由此说明在tasklet 函数中不能调用休眠函数。
 

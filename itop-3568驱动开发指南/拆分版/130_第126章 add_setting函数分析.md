@@ -312,6 +312,6 @@ return 0;
 }
 ```
 pinmux_map_to_setting() 函数和pinconf_map_to_setting ()函数根据不同类型进行不同的操作：如果pinctrl_map 类型为PIN_MAP_TYPE_MUX_GROUP，则将pinctrl_map 转换pinctrl_setting 结构体。如果pinctrl_map 类型为PIN_MAP_TYPE_CONFIGS_PIN 或PIN_MAP_TYPE_CONFIGS_GROUP，则将pinctrl_map 转换为pinctrl_setting 结构体.接着继续看add_setting()的第66 行代码list_add_tail(&setting->node, &state->settings)，第66 行代码将pinctrl_setting 结构体添加到了pinctrl_state 结构体的setting 链表中。在create_state()函数中将pinctrl_state 结构体添加到pinctrl 结构体的pinctrl_state 链表中。在pinctrl 结构体中又记录了dt_maps 信息，所以pinctrl_state 结构体便可以和pinctrl_map 结构体建立联系。如思维导图1.1 所示。注：该思维导图存放在网盘iTOP-RK3568 开发板\07_学习教程配套资料\03_Linux 驱动配套资
-![](images/vfig_p0884_455.png)
+![](../images/vfig_p0884_455.png)
 图126.1
 

@@ -110,7 +110,7 @@ MODULE_LICENSE("GPL");
 ## 166.3 运行测试
 ### 166.3.1 编译驱动程序
 在ft5x06_driver.c 代码同一目录下创建Makefile 文件，如图166.1 所示。
-![](images/img010662.jpeg)
+![](../images/img010662.jpeg)
 
 图166.1Makefile 文件内容如代码清单166.5 所示。代码清单166.5
 ```c
@@ -125,13 +125,13 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 在存放platform_driver.c 和Makefile 文件目录下使用make 命令编译驱动程序，编译完成如图166.2 所示。
-![](images/img010667.jpeg)
+![](../images/img010667.jpeg)
 图166.2编译完生成ft5x06_driver.ko 目标文件，如图166.3 所示。
-![](images/img010668.jpeg)
+![](../images/img010668.jpeg)
 图166.3至此驱动模块就编译成功了。
 ### 166.3.2 运行测试
 在进行实验之前，首先要确保开发板烧写的是我们在编写i2c client 代码章节中编译出来的boot.img。开发板启动之后，首先进入到/proc/device-tree/i2c@fe5a0000/目录下确保存在my-ft5x06@38 目录，如图166.4 所示。
-![](images/img010649.jpeg)
+![](../images/img010649.jpeg)
 图166.4如果存在my-ft5x06@38 目录接着使用insmod ft5x06_driver.ko 命令加载驱动程序，如图166.5 所示。
-![](images/img010669.jpeg)
+![](../images/img010669.jpeg)
 

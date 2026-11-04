@@ -1,7 +1,7 @@
 # 第103章  platform总线注册流程实例分析实验
 
 本章节分析platform 总线注册流程。内核在初始化的过程中调用platform_bus_init()函数来初始化平台总线，调用流程如下图103.1 所示：
-![](images/img009154.jpeg)
+![](../images/img009154.jpeg)
 图103.1我们直接分析platform_bus_init()函数。platform_bus_init 函数实现如代码清单103.1 所示。代码清单103.1
 ```c
 int __init platform_bus_init(void)

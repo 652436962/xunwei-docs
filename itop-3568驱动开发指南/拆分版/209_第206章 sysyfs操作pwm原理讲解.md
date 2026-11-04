@@ -89,7 +89,7 @@ void pwmchip_sysfs_export(struct pwm_chip *chip)代码清单206.2
 }
 ```
 代码清单206.2 第8 行的device_create() 函数用于创建sysfs 文件系统中的设备节点，在这里创建名为pwmchip%d 的设备节点，也就是在/sys/class/pwm 文件夹下的目录，如图206.1 所示。
-![](images/img011790.jpeg)
+![](../images/img011790.jpeg)
 图206.1device_create() 函数的第一个参数为pwm_class，它在驱动初始化时通过class_register()注册，如代码清单206.3 所示。
 ```c
 static int __init pwm_sysfs_init(void)代码清单206.3
@@ -201,9 +201,9 @@ static struct attribute *pwm_attrs[] = {
 };
 ```
 在该数组中包含了pwm 设备在sysfs 文件系统中可以导出的各种属性，这些属性会在pwm 设备的sysfs 子目录中创建对应的文件，如图206.2 所示。用户可以通过读写这些文件来控制和监控pwm 通道的行为。
-![](images/img011797.jpeg)
+![](../images/img011797.jpeg)
 图206.2这些属性也有着各自对应的读写函数，具体对应关系如图206.3 所示。
 
-![](images/img011800.jpeg)
+![](../images/img011800.jpeg)
 图206.3如果在源码中深究图206.3 中的函数会发现，通过sysfs 操作pwm 也是调用了pwm 子系统的API 操作函数来完成对pwm 的设置，如图206.3 中读函数都会调用pwm_get_state()这个API 函数获取pwm 属性，写函数都会调用pwm_apply_state()这个API 函数来设置pwm 属性。。
 

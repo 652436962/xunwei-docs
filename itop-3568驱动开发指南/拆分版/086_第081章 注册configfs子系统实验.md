@@ -1,6 +1,6 @@
 # 第081章 注册configfs子系统实验
 
-![](images/img008646.jpeg)
+![](../images/img008646.jpeg)
 图80.4
 本章节学习注册一个configfs 子系统。即使用configfs_subsystem 结构体在/sys/kernel/config路径下生成对应的目录。
 ## 81.1 API 函数介绍
@@ -56,7 +56,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 81.3 运行测试
 ### 81.3.1 编译驱动程序
 在configfs_subsystem.c 代码同一目录下创建Makefile 文件，如图81.1 所示
-![](images/img008655.jpeg)
+![](../images/img008655.jpeg)
 Makefile 文件内容如代码清单81.2 所示。代码清单81.2
 ```c
 export ARCH=arm64#设置平台架构

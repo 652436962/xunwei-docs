@@ -27,7 +27,7 @@ struct platform_driver {
 驱动匹配时候，如果存在id_table 成员，则优先使用id_table 进行匹配，如果id_table 为NULL，则使用driver.name 成员与platform_device.name 进行匹配。prevent_deferred_probe：一个布尔值，用于确定是否阻止延迟探测。如果设置为true，则延迟探测将被禁用。
 ## 59.2 实验程序的编写
 本实验代码存储在网盘iTOP-RK3568 开发板\07_学习教程配套资料\03_Linux 驱动配套资料\04_Linux 驱动例程\41 路径下。本实验注册一个platform 驱动并与对应的platform 设备进行匹配。当平台总线driver 部分中platform_driver.driver.name 成员的值与device 部分中platform_device.name 成员的值相同时，平台总线的device 和driver 两部会被平台总线匹配在一起。因此匹配规则的本质是字符串比较。匹配流程如图59.1 所示。
-![](images/img008074.jpeg)
+![](../images/img008074.jpeg)
 图59.1在注册platform 设备时候platform_device.name 值为my_platform_device。如代码清单59.2所示。代码清单59.2
 ```c
 static struct platform_device my_platform_device = {
@@ -100,7 +100,7 @@ MODULE_AUTHOR("topeet");
 ## 59.3 运行测试
 ### 59.3.1 编译驱动程序
 在platform_driver.c 代码同一目录下创建Makefile 文件，如图59.2 所示。
-![](images/img008080.jpeg)
+![](../images/img008080.jpeg)
 图59.2Makefile 文件内容如代码清单59.4 所示。代码清单59.4
 ```c
 export ARCH=arm64#设置平台架构
@@ -117,16 +117,16 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 在存放platform_driver.c 和Makefile 文件目录下使用make 命令编译驱动程序，编译完成如图59.3 所示。
-![](images/img008085.jpeg)
+![](../images/img008085.jpeg)
 图59.3编译完生成platform_driver.ko 目标文件，如图59.4 所示。
-![](images/img008086.jpeg)
+![](../images/img008086.jpeg)
 图59.4
 ### 59.3.2 运行测试
 本小节的测试需要用到两个驱动ko 文件，即上一章节的注册platform 设备ko 文件和本章节的注册platform 驱动ko 文件。开发板启动之后，使用insmod platform_driver.ko 命令进行驱动模块的加载，如图59.5 所示。
-![](images/img008087.jpeg)
+![](../images/img008087.jpeg)
 图59.5然后来到/sys/bus/platform/drivers 目录下，如果注册成功可以看到my_platform_driver 文件夹，如图59.6 所示。
-![](images/img008088.jpeg)
+![](../images/img008088.jpeg)
 图59.6然后使用insmod platform_device.ko 命令加载注册platform 设备ko 文件，（加载上述两个ko 文件不分先后顺序）加载成功之后如图59.7 所示。
-![](images/img008089.jpeg)
+![](../images/img008089.jpeg)
 图59.7
 

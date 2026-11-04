@@ -1,6 +1,6 @@
 # 第118章uevent_helper实验
 
-![](images/img009362.jpeg)
+![](../images/img009362.jpeg)
 图117.4至此，使用netlink 监听广播信息实验就完成了。
 本章节中会讲解内核发送事件到用户空间并处理的第二种方法。
 ## 118.1 设置uevent_helper
@@ -43,11 +43,11 @@ char uevent_helper[UEVENT_HELPER_PATH_LEN] = CONFIG_UEVENT_HELPER_PATH;
 #define CONFIG_UEVENT_HELPER_PATH ""
 ```
 在代码清单118.3 中该宏为空，如果要使能uevent_helper 功能需要在图形配置界面使能CONFIG_UEVENT_HELPER 和CONFIG_UEVENT_HELPER_PATH 两个宏。接下来介绍配置此宏的3种方法。配置方法一来到内核源码顶层目录下，如图118.1 所示。
-![](images/img009367.jpeg)
+![](../images/img009367.jpeg)
 图118.1然后输入以下命令将平台切换为arm64，并加载iTOP-RK3568 默认配置文件和进入图像配置界面。export ARCH=arm64
 
 make rockchip_linux_defconfigmake menuconfig如图118.2 所示。
-![](images/img009370.jpeg)
+![](../images/img009370.jpeg)
 图118.2接着在menuconfig 的图形配置界面选中4 项配置：配置项1:
 ```c
 Device Drivers
@@ -56,7 +56,7 @@ Device Drivers
         (/sbin/mdev) path to uevent helper//设置mdev 路径
 ```
 配置完成如图118.3 所示。
-![](images/img009371.jpeg)
+![](../images/img009371.jpeg)
 图118.3配置项2:
 ```c
 File systems
@@ -66,7 +66,7 @@ File systems
 ```c
 [*]/proc file system support//选中
 ```
-![](images/vfig_p0790_96.png)
+![](../images/vfig_p0790_96.png)
 图118.4配置项3:
 ```c
 File systems
@@ -75,14 +75,14 @@ File systems
 ```
 配置完成后如图118.5 所示。
 
-![](images/img009377.jpeg)
+![](../images/img009377.jpeg)
 图118.5配置项4:
 ```c
 [*]Networking support//选中
 ```
 配置完成后如图118.6 所示。
 
-![](images/img009380.jpeg)
+![](../images/img009380.jpeg)
 图118.64 项配项配置完成后需要重新编译内核，所以这种配置方法使用起来较为麻烦，除了这种配置方法外，还有配置方法2 和配置方法3。配置方法2无论是否配置了CONFIG_UEVENT_HELPER_PATH 配置项，在系统启动后，直接使用以下命令来设置uevent_helper：echo /sbin/mdev > /sys/kernel/uevent_helper这将会把uevent_helper 设置为/sbin/mdex。配置方法3无论是否配置了CONFIG_UEVENT_HELPER_PATH 配置，在系统启动后，直接使用以下命令来设置uevent_helper：echo /sbin/mdev > /proc/sys/kernel/hotplug这将把uevent_helper 设置为/sbin/mdexw.。需要注意的是配置方法2 和配置方法3 依赖于配置方法1 的配置项2、3、4，并且通过配置方法2 和配置方法3 也可以修改配置方法1 中已经设置的uevent_helper。对/proc/sys/kernel/hotplug 和/sys/kernel/uevent_helper 进行读写均是对uevent_helper 属性
 
 进行读写操作。/sys/kernel/uevent_helper 是sysfs 文件系统中的一个文件，它是uevent_helper 属性的接口。通过对该文件进行读写操作，可以读取或修改uevent_helper 属性的值。在内核源码的kernel/ksysfs.c 目录下可以找到对uevent_helper 属性的定义和相关操作的实现，如代码清单118.4 所示。代码清单118.4
@@ -145,15 +145,15 @@ int main(int argc, char *argv[])
 ```
 ### 118.2.2 编译应用程序
 使用aarch64-linux-gnu-gcc -o mdev mdev.c 命令编译应用程序，编译完成以后会生成一个mdev 的可执行程序，如图118.7 所示。
-![](images/img009389.jpeg)
+![](../images/img009389.jpeg)
 图118.7下面进行程序的测试。
 ### 118.2.3 运行测试
 本小节测试所使用的驱动文件为完善kset_uevent_ops 结构体实验中编译生成的uevent_ops.ko，应用程序为上一小节编译出来的mdev。将mdev 可执行文件和uevent_ops.ko 驱动存放在开发板的/mnt 目录下，如图118.8 所示。
-![](images/img009390.jpeg)
+![](../images/img009390.jpeg)
 图118.8在本章讲解了三种配置方法，配置方法1 是在内核中直接指定的，使用起来较为麻烦，这里直接使用配置方法2 和配置方法3 这两种方式进行演示。配置方法2：使用echo /mnt/mdev > /sys/kernel/uevent_helper 命令把本节编译的mdev 可执行文件设置成uevent_helper，然后使用命令insmod uevent_ops.ko 命令加载驱动程序，如图118.9 所示。
 
-![](images/img009395.jpeg)
+![](../images/img009395.jpeg)
 图118.9图118.9 中当加载驱动程序后会打印事件信息。说明实验成功。配置方法3：使echo /mnt/mdev > /proc/sys/kernel/hotplug用命令把本节编译的mdev可执行文件设置成uevent_helper，然后使用命令insmod uevent_ops.ko 命令加载驱动程序，如图119.10 所示。
-![](images/img009396.jpeg)
+![](../images/img009396.jpeg)
 图118.10图118.10 中当加载驱动程序后会打印事件信息。说明实验成功。至此，uevent_helper 实验就完成了。
 

@@ -1,8 +1,8 @@
 # 第050章 tasklet是特殊的软中断流程分析实验
 
-![](images/img007854.jpeg)
+![](../images/img007854.jpeg)
 图49.8在图49.8 中，可以看到打印中断处理函数中添加的打印“This is test_interrupt”和软中断处理函数中添加的打印“This is testsoft_func”。实验成功后使用rmmod interrupt 命令进行驱动的卸载，如下图49.9 所示：
-![](images/img007855.jpeg)
+![](../images/img007855.jpeg)
 图49.9至此，软中断实验就完成了。
 tasklet 是Linux 内核中的一种软中断机制，它通过软中断实现，因此也被称为软中断。本
 

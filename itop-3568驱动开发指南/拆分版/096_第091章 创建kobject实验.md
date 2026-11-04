@@ -1,7 +1,7 @@
 # 第091章 创建kobject实验
 
 在Linux 内核中，kset 和kobjec 是相关联的两个概念，它们之间存在一种层次化的关系，如下图90.9 所示：
-![](images/img008894.jpeg)
+![](../images/img008894.jpeg)
 图90.9
 
 本章进行创建kobject 实验，通过调用kobject 相关API 函数，在/sys 目录下实现目录创建。
@@ -56,7 +56,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 91.2 运行测试
 ### 91.2.1 编译驱动程序
 在和make_kobj.c 的同一目录下创建Makefile 文件，如图91.1 所示。
-![](images/img008902.jpeg)
+![](../images/img008902.jpeg)
 图91.1Makefile 文件内容如代码清单91.2 所示：代码清单91.2
 ```c
 export ARCH=arm64#设置平台架构
@@ -73,12 +73,12 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 回到存放make_kobj.c 和Makefile 文件目录下，使用命令make 编译驱动程序，编译成功后如图91.2 所示。
-![](images/img008907.jpeg)
+![](../images/img008907.jpeg)
 图91.2编译完后会生成make_kobj.ko 目标文件，如图91.3 所示：
-![](images/img008908.jpeg)
+![](../images/img008908.jpeg)
 图91.3至此，我们的驱动模块就编译成功了，下面进行运行测试。
 ### 91.2.2 运行测试
 将本章节编译好的make_kobj.ko 驱动文件拷贝到开发板上。开发板启动之后，使用insmod make_kobj.ko 命令进行驱动模块的加载，如下图91.4 所示：
-![](images/img008909.jpeg)
+![](../images/img008909.jpeg)
 图91.4驱动加载之后，我们进入/sys/目录下，如下图91.5 所示：
 

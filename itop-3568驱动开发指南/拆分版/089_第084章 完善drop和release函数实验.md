@@ -110,7 +110,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 84.3 运行测试
 ### 84.3.1 编译驱动程序
 在drop.c 代码同一目录下创建Makefile 文件，如图84.1 所示。
-![](images/img008725.jpeg)
+![](../images/img008725.jpeg)
 图84.1Makefile 文件内容如代码清单84.2 所示。代码清单84.2
 ```c
 export ARCH=arm64#设置平台架构
@@ -124,21 +124,21 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 回到存放drop.c 和Makefile 文件目录下，命令make 编译驱动程序，编译完成如图84.2 所示。
-![](images/img008726.jpeg)
+![](../images/img008726.jpeg)
 图84.2编译完生成drop.ko 目标文件，如图84.3 所示。
-![](images/img008727.jpeg)
+![](../images/img008727.jpeg)
 图84.3至此驱动模块就编译成功了，接下来进行测试。
 
 ### 84.3.2 运行测试
 开发板启动之后，使用insmod drop.ko 命令加载驱动程序，如图84.4 所示。
-![](images/img008732.jpeg)
+![](../images/img008732.jpeg)
 图84.4驱动加载之后进入/sys/kernel/config 目录下，可以看到注册生成的myconfigfs 子系统，如图84.5 所示。
-![](images/img008684.jpeg)
+![](../images/img008684.jpeg)
 图84.5然后进入注册生成的myconfigfs 子系统，可以看到注册生成的mygroup 容器。如图84.6所示。
-![](images/img008685.jpeg)
+![](../images/img008685.jpeg)
 图84.6然后输入mkdir test 命令创建config_item，创建成功之后会打印“mygroup_make_item”。如图84.7 所示。
-![](images/img008710.jpeg)
+![](../images/img008710.jpeg)
 图84.7输入rmdir test 命令删除item,如下图所示，执行rmdir 命令之后，如果实验成功会依次执行了mygroup_delete_item 函数和myitem_release 函数。如图84.8 所示。
-![](images/img008733.jpeg)
+![](../images/img008733.jpeg)
 图84.8
 

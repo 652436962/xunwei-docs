@@ -18,7 +18,7 @@ my_gpio:gpiol_a0 {
 };
 ```
 添加完成如图136.1 所示。
-![](images/img009929.jpeg)
+![](../images/img009929.jpeg)
 图136.1至此，设备树修改就完成了，保存退出之后，重新编译内核，然后将生成的boot.img 镜像烧写到开发板上即可。
 ## 136.3 驱动程序的编写
 本实验代码存储在网盘iTOP-RK3568 开发板\07_学习教程配套资料\03_Linux 驱动配套资料\04_Linux 驱动例程\88_gpioctrl07\02_module 路径下。实验代码gpio_api.c 如代码清单136.2 所示。代码清单136.2
@@ -107,7 +107,7 @@ MODULE_AUTHOR("topeet");
 ## 136.4 运行测试
 ### 136.4.1 编译驱动程序
 在gpio_api.c 代码同一目录下创建Makefile 文件，如图136.2 所示：
-![](images/img009935.jpeg)
+![](../images/img009935.jpeg)
 图136.2Makefile 文件内容如代码清单136.3 所示。代码清单136.3
 ```c
 export ARCH=arm64#设置平台架构
@@ -124,19 +124,19 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 在存放gpio_api.c 和Makefile 文件目录下使用make 命令编译驱动程序，编译完成如图136.3 所示。
-![](images/img009940.jpeg)
+![](../images/img009940.jpeg)
 图136.3编译完生成gpio_api.ko 目标文件，如图136.4 所示。
-![](images/img009941.jpeg)
+![](../images/img009941.jpeg)
 图136.4至此驱动模块就编译成功了。
 ### 136.4.2 运行测试
 首先需要确保当前开发板使用的内核镜像是我们在本章节中修改设备树后编译生成的镜像，然后启动开发板使用cat /sys/kernel/debug/pinctrl/pinctrl-rockchip-pinctrl/pinmux-pins | grep32 命令查看gpio1 RK_PA0 引脚的复用功能，如图136.5 所示。
-![](images/img009942.jpeg)
+![](../images/img009942.jpeg)
 图136.5由图135.5 可以看到在没有加载驱动之前，gpio1 RK_PA0 引脚是没有进行复用的，然后使用insmod gpio_api.ko 命令加载驱动程序，如图136.6 所示。
-![](images/img009943.jpeg)
+![](../images/img009943.jpeg)
 图136.6接着重新使用cat /sys/kernel/debug/pinctrl/pinctrl-rockchip-pinctrl/pinmux-pins | grep 32 命令查看gpio1 RK_PA0 引脚的复用功能，如图136.7 所示。
 
-![](images/img009947.jpeg)
+![](../images/img009947.jpeg)
 图136.7由图136.7 打印信息可以得到gpio1 RK_PA0 已经被设置为了GPIO 功能，证明已经成功使用了在设备树中添加的pinctrl-names 状态对应的引脚复用配置，实验成功后使用rmmodgpio_api.ko 命令卸载驱动程序，如图136.8 所示。
-![](images/img009948.jpeg)
+![](../images/img009948.jpeg)
 图136.8至此，GPIO 子系统与pinctrl 子系统相结合实验实验就完成了。
 

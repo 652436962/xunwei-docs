@@ -1,15 +1,15 @@
 # 第170章 i2c_transfer函数分析
 
 在存放ft5x06_driver.c 和Makefile 文件目录下使用make 命令编译驱动程序，编译完成如图169.2 所示。
-![](images/img010759.jpeg)
+![](../images/img010759.jpeg)
 图169.2编译完生成ft5x06_driver.ko 目标文件，如图169.3 所示。
-![](images/img010760.jpeg)
+![](../images/img010760.jpeg)
 图169.3
 ### 169.3.2 运行测试
 将本章节编译完成的ft5x06_driver.ko 文件拷贝到开发板上，然后使用insmodft5x06_driver.ko 命令加载驱动程序，加载完成如图169.4 所示。
-![](images/img010761.jpeg)
+![](../images/img010761.jpeg)
 图169.4由图174.4 打印结果可以得到，通过ft5x06 的写函数成功向0x80 地址写入了0x4b 并通过fr5x06 的读函数程序读取，实验成功后使用rmmod ft5x06_driver.ko 命令卸载驱动程序，如图169.5 所示。
-![](images/img010733.jpeg)
+![](../images/img010733.jpeg)
 图169.5
 
 本章分析i2c_transfer()函数通信流程。

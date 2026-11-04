@@ -1,9 +1,9 @@
 # 第079章 虚拟文件系统configfS介绍
 
 实验成功后删除test1 文件夹，如图78.19 所示。
-![](images/img008621.jpeg)
+![](../images/img008621.jpeg)
 图78.19可以看到status 的属性值又变成了okay，如图78.20 所示。
-![](images/img008622.jpeg)
+![](../images/img008622.jpeg)
 图78.20至此，加载多个dtbo 实验完成。
 
 设备树插件基于虚拟文件系统configfs 实现。虚拟文件系统configfS 是一个特殊的文件系统，旨在提供一种动态配置Linux 内核和设备的机制。本章学习虚拟文件系统configfS 的基础知识。

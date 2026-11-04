@@ -118,7 +118,7 @@ MODULE_AUTHOR("topeet");
 ## 58.3 运行测试
 ### 58.3.1 编译驱动程序
 在platform_device.c 代码同一目录下创建Makefile 文件，如图58.1 所示。
-![](images/img008052.jpeg)
+![](../images/img008052.jpeg)
 图58.1Makefile 文件内容如代码清单58.4 所示。代码清单58.4
 ```c
 export ARCH=arm64#设置平台架构
@@ -133,16 +133,16 @@ clean:
 ```
 在存放platform_device.c 和Makefile 文件目录下使用make 命令编译驱动程序，编译完成如图58.2 所示。
 
-![](images/img008057.jpeg)
+![](../images/img008057.jpeg)
 图58.2编译完生成platform_device.ko 目标文件，如图58.3 所示。
-![](images/img008058.jpeg)
+![](../images/img008058.jpeg)
 图58.3
 ### 58.3.2 运行测试
 将本章节编译好的platform_device.ko 驱动文件拷贝到开发板上。开发板启动之后，使用insmod platform_device.ko 命令进行驱动模块的加载，如图58.4 所示。
-![](images/img008059.jpeg)
+![](../images/img008059.jpeg)
 图58.4然后来到/sys/bus/platform/devices 目录下，如果可以看到创建的my_platform_device 设备文件目录，则说明platform 设备注册成功，如图58.5 所示。
-![](images/img008060.jpeg)
+![](../images/img008060.jpeg)
 图58.5然后使用rmmod platform_device.ko 命令进行驱动模块的卸载，如图58.6 所示。
-![](images/img008061.jpeg)
+![](../images/img008061.jpeg)
 图58.6
 

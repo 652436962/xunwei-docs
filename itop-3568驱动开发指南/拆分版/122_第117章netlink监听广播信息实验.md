@@ -1,10 +1,10 @@
 # 第117章netlink监听广播信息实验
 
-![](images/img009288.jpeg)
+![](../images/img009288.jpeg)
 图116.4
-![](images/img009331.jpeg)
+![](../images/img009331.jpeg)
 图116.5因为在函数filter 中把mykobject01 的事件过滤掉了。所以在图116.5 中只有mykobject02的add 事件，没mykobject01 的add 事件。实验完成后可以使用rmmod uevent_ops 命令进行驱动的卸载，如图116.6 所示。
-![](images/img009332.jpeg)
+![](../images/img009332.jpeg)
 图116.6至此，完善kset_uevent_ops 实验就完成了。
 
 在上一章的实验中，我们填充了三个回调函数，分别为.filter = myfilter,.uevent =myevent,.name = myname,但在最后的实验中只验证filter 过滤了kset 中的kobject1，那另外两个回调函数要如何验证呢？内核通过kobject uevent 接口发送广播事件之后，用户空间可以通过netlink 来监听这些广播信息。通过监听广播信息，就可以获取到携带环境变量的事件，在本章节将会对netlink 进行详细的讲解。
@@ -139,12 +139,12 @@ return 0;
 使用aarch64-linux-gnu-gcc -o netlink netlink.c 命令编译应用程序，编译完成以后会生成一
 
 个netlink 的可执行程序，如图117.1 所示。
-![](images/img009356.jpeg)
+![](../images/img009356.jpeg)
 图117.1下面进行程序的测试。
 ### 117.4.2 运行测试
 本小节测试所使用的驱动文件为上一章编译生成的uevent_ops.ko，应用程序为上一小节编译出来的netlink。开发板启动之后，首先使用./netlink &命令让应用程序在后台运行，如图117.2 所示：
-![](images/img009357.jpeg)
+![](../images/img009357.jpeg)
 图117.2然后使用insmod uevent_ops.ko 命令加载uevent_ops.ko 驱动，如图117.3 所示。
-![](images/img009358.jpeg)
+![](../images/img009358.jpeg)
 图117.3图117.3 中打印了netlink 接收到的信息，其中SUBSYSTEM=my_kset，表示设备或对象所属的子系统。在这里，子系统是"my_kset"。MYDEVICE 表示设备的名称或标识。在这里，设备的名称是"TOPEET"，正是在.name 回调函数中所设置的名称。实验成功后使用rmmod uevent_ops.ko 命令进行驱动的卸载，如图117.4 所示。
 

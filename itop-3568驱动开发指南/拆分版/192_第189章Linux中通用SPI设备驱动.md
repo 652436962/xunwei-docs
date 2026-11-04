@@ -3,7 +3,7 @@
 本章介绍通用SPI 设备驱动（spidev）的使用方法，并讲解如何在用户空间中通过spidev工具和ioctl 配置和访问SPI 设备。。
 ## 189.1 内核和设备树配置
 在iTOP-RK3568 开发板的内核源码中，通用SPI 设备驱动已默认启用。通用SPI 设备驱动配置项位于内核make menuconfig 图形化配置界面Device Drivers- > SPI support 路径下，如图189.1
-![](images/vfig_p1383_351.png)
+![](../images/vfig_p1383_351.png)
 图189.1除了内核需要配置，设备树文件中也需要正确添加SPI 外设对应的设备节点。在之前章节中在SPI0 控制器下添加了mcp2515 的设备节点。如果想使用通用SPI 设备驱动让mcp2515 工
 
 作起来，只需要把mcp2515 设备节点中的compatible 属性修改为rockchip,spidev 即可，如代码清单189.1 所示。
@@ -21,13 +21,13 @@
 };
 ```
 本章依旧使用mcp2515 作为实验外设，按照本节的方法使能内核与设备树以后，重新编译内核并将编译好的内核烧写到开发板上。为了方便起见，作者已经编译好的内核镜像放到了网盘iTOP-RK3568 开发板\07_学习教程配套资料\03_Linux 驱动配套资料\04_Linux 驱动程序\119_mcp2515_07\01_编译好的内核镜像路径下。开发板启动之后，如果存在/dev/spidev0.0 设备节点，则证明设备树及内核配置正确，如图189.2 所示。
-![](images/img011357.jpeg)
+![](../images/img011357.jpeg)
 图189.2其中spidev0.0 节点名中的0.0 表示mcp2515 挂载在SPI0 总线上，并且是连接在SPI0 总线上的第0 个设备。0.0 对应的格式为x.y。x 表示设备挂载在哪个SPI 总线下。y 表示连接在该SPI 总线上的设备编号，设备编号从0 开始。内核支持通用SPI 设备驱动以后就可以在应用层中使用spidev 工具和通过ioctl()函数操作挂载在spi 总线下的spi 设备。
 ## 189.2 spidev 工具组使用
 spidev 工具组是Linux 系统中用于测试和调试SPI 设备的命令行工具集合，spidev 工具组中
 
 的spidev_test 和spidev_fdx 工具主要用于验证SPI 设备的通信功能、参数配置和数据传输特性。spidev 工具组源码位于内核源码kernel/tools/spi 目录下，如图189.3 所示。
-![](images/img011361.jpeg)
+![](../images/img011361.jpeg)
 图189.3使用以下命令对该工具进行交叉编译（因为编译器使用的是绝对路径，因此需根据自己交叉编译器实际路径来修改编译命令）。
 ```c
 make
@@ -37,23 +37,23 @@ LD=/home/topeet/Linux/linux_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1
 ux-gnu/bin/aarch64-linux-gnu-ld
 ```
 如图189.4 所示。
-![](images/img011362.jpeg)
+![](../images/img011362.jpeg)
 图189.4编译好的可执行文件如图189.5 所示。
-![](images/img011363.jpeg)
+![](../images/img011363.jpeg)
 图189.5可执行文件spidev_fdx 和spidev_test 即spidev 工具组工具。将可执行文件拷贝到开发板上即可使用spidev 工具。1.spidev_test 工具的使用。spidev_test 工具的核心功能包括验证设备连通性、执行基本读写操作以及测试传输参数配
 
 置。主要选项和参数如图189.6 所示。
-![](images/img011366.jpeg)
+![](../images/img011366.jpeg)
 图189.6示例1：读取设备信息通过“spidev_test -D /dev/spidevX.Y -s 1000000”命令，使用1MHz 的时钟频率从SPI 设备读取数据，其中X 是SPI 控制器的编号，Y 是SPI 设备的编号，X.Y 后续不在赘述，运行结果如图189.7 所示。
-![](images/img011367.jpeg)
+![](../images/img011367.jpeg)
 图189.7示例2：写入和读取数据通过“spidev_test -D /dev/spidevX.Y -s 1000000 -b 8 -d 1000 -H -p 'hello'”命令向SPI设备写入字符串hello，并以十六进制模式显示设备的响应数据。其中“-b 8”表示指定每个字的位数为8，“-d 1000”表示设置1000 微秒的延迟，运行结果如图189.8 所示。
-![](images/img011368.jpeg)
+![](../images/img011368.jpeg)
 图189.8示例3：连续传输通过“spidev_test -D /dev/spidevX.Y -s 1000000 -b 8 -p 'abcdefgh'”命令连续发送字节'abcdefgh'到SPI 设备，运行结果如图189.9 所示。
-![](images/img011369.jpeg)
+![](../images/img011369.jpeg)
 图189.92.spidev_fdx 工具的使用
 
 spidev_fdx 是一个用于全双工SPI 通信测试的命令行工具，主要选项和参数如图189.10 所示。
-![](images/img011372.jpeg)
+![](../images/img011372.jpeg)
 图189.10示例1：发送和接收数据通过“spidev_fdx -D /dev/spidevX.Y -s 1000000 -w 'hello' -r 5”命令向SPI 设备写入字符串'hello'，并从设备读取5 个字节的响应数据。示例2：设置时钟频率和延迟通过“spidev_fdx -D /dev/spidevX.Y -s 500000 -d 200 -w 'abcdef' -r 10”命令将SPI 时钟频率设置为500kHz，数据写入延迟为200 微秒，向设备写入字符串'abcdef'，然后读取10 个字节的响应数据。
 ## 189.3 应用程序中如何使用SPI
 在应用程序中可以通过ioctl 命令获取和配置SP，实现SPI 数据的发送和接收，ioctl 命令定义在头文件/usr/include/linux/spi/spidev.h 中，如代码清单189.2 所示。

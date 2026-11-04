@@ -87,9 +87,9 @@ int platform_device_add(struct platform_device *pdev)
 ```
 }代码清单106.4 中设置设备名字有三种格式，三种格式分别如下图106.1 和图106.2 中红框所示：
 
-![](images/img009201.jpeg)
+![](../images/img009201.jpeg)
 图106.1
-![](images/img009202.jpeg)
+![](../images/img009202.jpeg)
 图106.2
 步骤四添加设备资源，如代码清单106.5 所示。代码清单106.5
 ```c

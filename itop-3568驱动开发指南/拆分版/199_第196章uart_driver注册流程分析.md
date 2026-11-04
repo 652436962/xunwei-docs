@@ -4,7 +4,7 @@
 本章分析uart_driver 注册流程。
 ## 196.1 关键结构体介绍
 uart_driver 注册流程中涉及到的关键结构体之间的关系如下图196.1 所示：
-![](images/img011490.jpeg)
+![](../images/img011490.jpeg)
 图196.1接下来我们依次学习一下这几个结构体。struct uart_driver 结构体本身并不包含底层UART 硬件的操作方法，它是所有串口设备驱动的抽象和封装。起到了连接硬件设备驱动和TTY 驱动的作用。struct uart_driver 定义在内核源码include/linux/serial_core.h 文件中，结构体定义如代码清单196.1 所示：代码清单196.1
 ```c
 struct uart_driver {

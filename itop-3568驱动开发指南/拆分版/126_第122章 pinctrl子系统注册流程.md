@@ -12,7 +12,7 @@ uart0_rtsn: uart0-rtsn {
 };
 ```
 在第22 至36 行中描述的是uart0 所使用的引脚，其中uart0 节点下包含三个子节点uart0_xfer、uart0_ctsn 和uart0_rtsn，每个子节点定义了一组引脚。每组引脚可以包含一个或多个具体引脚，用于表示某一特定功能。例如，uart0_xfer 表示uart0 的收发引脚RX 和TX。一组引脚又叫做group，设备树中的group 节点除了标识引脚编号外，还定义了引脚的电气特性，如是否上拉、下拉、浮空等。例如，pcfg-pull-none 表示引脚内部浮空，pcfg_pull_up 表示开启内部上拉。uart0 节点也叫做function，function 表示引脚功能，如uart0 这个function 表示uart0所需引脚的复用设置和电气属性。在设备树中，function 和group 节点的配置通常由芯片厂商工程师编写并提供。设备树中只是设备的描述信息，pinctrl 驱动会获取设备树中pinctrl 的描述信息。根据rk3568.dtsi 设备树中pinctrl 节点的compatible 属性进行查找，可以查找到pinctrl 的驱动文件是内核源码的“/driver/pinctrl/pinctrl-rockchip.c”如图121.2 所示。
-![](images/img009485.jpeg)
+![](../images/img009485.jpeg)
 图121.2
 本章节以iTOP-RK3568 开发板的SDK 为例分析pinctrl 子系统的注册流程。
 ## 122.1 probe 函数分析

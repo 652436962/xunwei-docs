@@ -46,7 +46,7 @@ MODULE_AUTHOR("topeet"); //作者信息
 ## 10.3 运行测试
 ### 10.3.1 编译驱动程序
 在上一小节中的define.c 代码同一目录下创建Makefile 文件，如图10.1 所示。
-![](images/img006610.jpeg)
+![](../images/img006610.jpeg)
 图10.1Makefile 文件内容如代码清单10.3 所示。代码清单10.3
 ```c
 KBUILD_CFLAGS_MODULE += -DDEBUG
@@ -61,12 +61,12 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 接着来到存放define.c 和Makefile 文件目录下，使用命令make 进行驱动的编译，编译完成如图10.2 所示：
-![](images/img006611.jpeg)
+![](../images/img006611.jpeg)
 图10.2编译完生成define.ko 目标文件，如图10.3 所示：
-![](images/img006612.jpeg)
+![](../images/img006612.jpeg)
 图10.3至此驱动模块就编译成功了。
 ### 10.3.2 运行测试
 开发板启动之后，使用insmod define.ko 命令进行驱动模块的加载。加载成功如图10.4 所示
-![](images/img006613.jpeg)
+![](../images/img006613.jpeg)
 图10.4
 

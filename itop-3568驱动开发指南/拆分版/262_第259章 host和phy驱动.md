@@ -1,10 +1,10 @@
 # 第259章 host和phy驱动
 
-![](images/img013349.jpeg)
+![](../images/img013349.jpeg)
 图258.10如果可以ping 通，说明开发板已实现USBNET 功能，则实验完成。
 在前面的章节中，我们已完成USB 键盘驱动的编写以及Gadget 驱动的配置实践。结合图259.1 所示的USB 驱动框架可知，USB 核心层代码无需我们过多关注。在此基础上，剩余需要学习的部分便是host 和phy 驱动，本章节将围绕这部分内容展开讲解。
 
-![](images/img013353.jpeg)
+![](../images/img013353.jpeg)
 图259.1
 ## 259.1 内核配置
 在Linux 内核源码中，USB host 和PHY 驱动是默认加载的，USB PHY 模块配置项位于内核menuconfig 图形化界面中的路径如代码清单259.1 所示路径。代码清单259.1
@@ -42,9 +42,9 @@ Device Drivers--->
 ## 259.2 设备树配置
 RK3568 支持1 路USB3.0 OTG、1 路USB3.0 HOST 和2 路2.0 HOST，其功能配置通过设备树节点使能及参数设置实现。USB PHY 节点匹配信息如表259.1 所示：表259.1
 
-![](images/img013360.jpeg)
+![](../images/img013360.jpeg)
 USB 控制器节点匹配信息如表259.2 所示：表259.2
-![](images/img013361.jpeg)
+![](../images/img013361.jpeg)
 配置USB3.0 OTG 功能的设备树内容如代码清单259.3 如下：代码清单259.3
 ```c
 &usbdrd_dwc3 {

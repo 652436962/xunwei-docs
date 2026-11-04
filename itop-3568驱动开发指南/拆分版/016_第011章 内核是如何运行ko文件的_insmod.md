@@ -1,16 +1,16 @@
 # 第011章 内核是如何运行ko文件的_insmod
 
 根据打印信息可以确定DEBUG 宏定义已经被定义了，所以才会打印“helloworld b!”，如果删除Makefile 文件中的第一行内容之后，重新加载内核就会打印“helloworld a!”。实验现象如图10.5 所示。
-![](images/img006619.jpeg)
+![](../images/img006619.jpeg)
 图10.5使用rmmod define.ko 命令对该内核进行卸载，如图10.6 所示。
-![](images/img006620.jpeg)
+![](../images/img006620.jpeg)
 图10.6至此，驱动代码使用Makefile 的宏实验就完成了。
 本章为驱动基础中的进阶部分。加载内核模块使用insmod 命令，本章学习insmod 命令是如何加载内核模块的。
 ## 11.1 insmod 源码分析
 北京迅为开发板的所有系统都默认支持insmod 命令，命令本质上是一个可执行程序,因此也有着对应的源码，不管是何种系统，insmod 命令的源码是相同的（可能会因为版本不同，存在细微的差别）。本章节使用busybox 文件系统中的insmod 命令源码进行讲解。busybox 文件系统源码存放在在网盘iTOP-RK3568 开发板\07_学习教程配套资料\03_Linux 驱动配套资料\04_Linux 驱动例程\58_module\01_busybox 源码目录下，如图11.1 所示：
-![](images/img006621.jpeg)
+![](../images/img006621.jpeg)
 图11.1将busybox 源码拷贝到虚拟机Ubuntu 上并解压，解压完成如图11.2 所示：
-![](images/img006622.jpeg)
+![](../images/img006622.jpeg)
 图11.2
 
 insmod 的源码位于busybox-1.34.1/modutils/insmod.c 目录下，该源码的主要内容如代码清单11.1 所示。代码清单11.1
@@ -147,7 +147,7 @@ int main(int argc, char **argv)
 ## 11.3 运行测试
 ### 11.3.1 编译驱动程序
 在上一小节中的helloworld.c 代码同一目录下创建Makefile 文件，如图11.3 所示。
-![](images/img006635.jpeg)
+![](../images/img006635.jpeg)
 
 图11.3Makefile 文件内容如代码清单11.5 所示。代码清单11.5
 ```c
@@ -162,22 +162,22 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 在存放helloworld.c 和Makefile 文件目录下使用命令“make”编译命令，编译完成如图11.4所示。
-![](images/img006641.jpeg)
+![](../images/img006641.jpeg)
 图11.4编译完生成helloworld.ko 目标文件，如图11.5 所示：
-![](images/img006642.jpeg)
+![](../images/img006642.jpeg)
 图11.5至此驱动模块就编译成功了。
 ### 11.3.2 编译应用程序
 使用aarch64-linux-gnu-gcc app.c -o app 命令交叉应用程序，如代码清单11.5 所示。编译成功如图11.6 所示。
-![](images/img006643.jpeg)
+![](../images/img006643.jpeg)
 图11.6
 ### 11.3.2 运行测试
 将本章节编译好的helloworld.ko 驱动文件和app 可执行文件拷贝到开发板上。开发板启动之后，使用./app helloworld.ko 命令加载helloworld.ko 驱动，如图11.7 所示。
 
-![](images/img006648.jpeg)
+![](../images/img006648.jpeg)
 图11.7图11.7 红色框中是dump_stack 函数打印的函数调用关系，这些函数的具体调用已经在进阶第一章讲解过了，这里的重点为红色框中的倒数第二行，倒数第二行调用finit_module 函数加载了helloworld 驱动。
 然后使用lsmod 命令查看驱动的加载情况，如图11.8 所示。
-![](images/img006649.jpeg)
+![](../images/img006649.jpeg)
 图11.8通过图11.8 可以看到helloworld 驱动成功加载上了，使用rmmod helloworld.ko 命令可以下载helloworld 驱动，如图11.9 所示。
-![](images/img006650.jpeg)
+![](../images/img006650.jpeg)
 图11.9通过此实验可以验证在应用程序中调用finit_module 系统调用函数可以加载驱动程序。
 

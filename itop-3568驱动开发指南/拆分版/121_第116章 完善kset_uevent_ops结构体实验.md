@@ -93,7 +93,7 @@ MODULE_AUTHOR("topeet"); // 模块的作者
 ## 116.2 运行测试
 ### 116.2.1 编译驱动程序
 在上一小节中的uevent_ops.c 代码同一目录下创建Makefile 文件，如图116.1 所示。
-![](images/img009321.jpeg)
+![](../images/img009321.jpeg)
 图116.1
 
 Makefile 文件内容如代码清单116.3 所示。代码清单116.3
@@ -109,9 +109,9 @@ clean:
     make -C $(KDIR) M=$(PWD) clean#make clean 操作
 ```
 回到存放uevent_ops.c 和Makefile 文件目录下，使用命令make 编译驱动程序，编译完成如图116.2 所示。
-![](images/img009326.jpeg)
+![](../images/img009326.jpeg)
 图116.2编译成功会生成uevent_ops.ko 目标文件，如图116.3 所示。
-![](images/img009327.jpeg)
+![](../images/img009327.jpeg)
 图116.3至此驱动模块就编译成功了，接下来进行测试。
 ### 116.2.2 运行测试
 开发板启动之后，使用命令udevadm monitor &监视和显示当前系统中的uevent 事件。然后使用insmod uevent_ops.ko 命令加载驱动程序，如图116.4 和116.5 所示。
